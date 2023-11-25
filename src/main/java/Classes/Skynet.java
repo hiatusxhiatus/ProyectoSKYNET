@@ -41,7 +41,7 @@ public class Skynet {
         this.beforeGraph = newGraph;
         JComponent graphComponent = GraphToGUI.createTransparentJGraphXGraph(newGraph, false);
         graphComponent.setVisible(true);
-        windowRef.getPnlBefore().add(graphComponent, Component.CENTER_ALIGNMENT);
+        windowRef.getPnlBefore().add(graphComponent);
 
     }
 

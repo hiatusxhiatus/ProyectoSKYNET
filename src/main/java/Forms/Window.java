@@ -41,13 +41,13 @@ public class Window extends javax.swing.JFrame {
 
         pnlBefore.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         pnlBefore.setOpaque(false);
-        pnlBefore.setLayout(null);
+        pnlBefore.setLayout(new java.awt.BorderLayout());
         pnlGraphs.add(pnlBefore);
         pnlBefore.setBounds(20, 190, 520, 500);
 
         pnlAfter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         pnlAfter.setOpaque(false);
-        pnlAfter.setLayout(null);
+        pnlAfter.setLayout(new java.awt.BorderLayout());
         pnlGraphs.add(pnlAfter);
         pnlAfter.setBounds(560, 190, 520, 500);
 
