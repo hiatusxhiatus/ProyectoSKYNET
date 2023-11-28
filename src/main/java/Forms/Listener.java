@@ -96,13 +96,32 @@ public class Listener implements ActionListener {
                         JOptionPane.showMessageDialog(skynet.getWindowRef(), "CANT EXECUTE ANNIHILATION 3", "ERROR", JOptionPane.ERROR_MESSAGE);
                     break;
                 case 5:
-                    skynet.setBeforeGraph(AnnihilationsAlgorithms.convertToDirectedGraph(skynet.getBeforeGraph()));
+
+                    //skynet.setBeforeGraph(AnnihilationsAlgorithms.convertToDirectedGraph(skynet.getBeforeGraph()));
                     List<CustomWeightedEdge> edgeList = AnnihilationsAlgorithms.type5Annihilation(skynet.getBeforeGraph());
 
                     if (edgeList != null){
+                        JOptionPane.showMessageDialog(skynet.getWindowRef(), "EURELIAN PATH FOUNDED.\n RESULTS SHOWED IN CONSOLE");
 
-                        // Mostrar el edgeList que conforma el eulerianPath del grafo
-                        System.out.println("EULERIAN PATH FOUNDED");
+                        String str = "";
+
+                        for (CustomWeightedEdge edge : edgeList) {
+                            CustomVertex sourceVertex = skynet.getBeforeGraph().getEdgeSource(edge);
+                            CustomVertex targetVertex = skynet.getBeforeGraph().getEdgeTarget(edge);
+                            //System.out.println("->> Source: " + sourceVertex.getId() + ", Target: " + targetVertex.getId());
+                            str  = str + "->> Source: " + sourceVertex.getId() + ", Target: " + targetVertex.getId() + "\n";
+                        }
+
+                        System.out.println(str);
+
+                        /*
+                        System.out.println(skynet.getConsoleMenu().getTxaEulerianPath().getText());
+                        skynet.getConsoleMenu().getTxaEulerianPath().setText("AAAAAAAAAAAAAAAAAA");
+                        skynet.getConsoleMenu().setVisible(true);
+                        skynet.getConsoleMenu().getTxaEulerianPath().revalidate();
+                        skynet.getConsoleMenu().getTxaEulerianPath().repaint();
+                        */
+
 
                     } else
                         JOptionPane.showMessageDialog(skynet.getWindowRef(), "CANT EXECUTE ANNIHILATION 5", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -112,17 +131,29 @@ public class Listener implements ActionListener {
 
                     if (edgeList_ != null) {
 
+                        JOptionPane.showMessageDialog(skynet.getWindowRef(), "EURELIAN PATH FOUNDED.\n RESULTS SHOWED IN CONSOLE");
                         System.out.println("\n>> SEQUENCE OF EDGES OF THE EULERIAN PATH<<\n");
+
+                        String str = "";
 
                         for (CustomWeightedEdge edge : edgeList_) {
                             CustomVertex sourceVertex = skynet.getBeforeGraph().getEdgeSource(edge);
                             CustomVertex targetVertex = skynet.getBeforeGraph().getEdgeTarget(edge);
-
-                            System.out.println("->> Source: " + sourceVertex.getId() + ", Target: " + targetVertex.getId());
+                            str += "->> Source: " + sourceVertex.getId() + ", Target: " + targetVertex.getId() + "\n";
                         }
 
                         skynet.setAfterGraph(AnnihilationsAlgorithms.type6Annihilation(skynet.getBeforeGraph(), edgeList_));
                         skynet.showAfterGraph(skynet.getAfterGraph());
+
+
+                        System.out.println(str);
+                        /*
+                        //skynet.getConsoleMenu().getTxaConsole().setText(str);
+                        skynet.getConsoleMenu().setVisible(true);
+                        skynet.getConsoleMenu().revalidate();
+                        skynet.getConsoleMenu().repaint();
+
+                        */
 
                     } else
                         JOptionPane.showMessageDialog(skynet.getWindowRef(), "CANT EXECUTE ANNIHILATION 6", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +164,9 @@ public class Listener implements ActionListener {
                 case 8:
                     skynet.selectCitiesMenu();
                     break;
-
+                case 10:
+                    skynet.selectCitiesMenu();
+                    break;
             }
 
         } else if (e.getSource().equals(skynet.getCitiesMenuRef().getBtnAccept())) {
@@ -164,6 +197,16 @@ public class Listener implements ActionListener {
 
                 skynet.setAfterGraph(AnnihilationsAlgorithms.type7Annihilation(skynet.getBeforeGraph(), shortestPath_));
                 skynet.showAfterGraph(skynet.getAfterGraph());
+
+            } else if (skynet.getWindowRef().getCbxAnnihilateCode().getSelectedIndex()+1 == 10) {
+
+                skynet.setFirstCity(skynet.getVerticesArray().get(Integer.parseInt(skynet.getCitiesMenuRef().getTxfFirst().getText())-1));
+                skynet.setSecondCity(skynet.getVerticesArray().get(Integer.parseInt(skynet.getCitiesMenuRef().getTxfSecond().getText())-1));
+                AnnihilationsAlgorithms.changeWeightValue(skynet.getBeforeGraph(), 2);
+
+                skynet.setAfterGraph(AnnihilationsAlgorithms.type10Annihilation(skynet.getBeforeGraph(), skynet.getFirstCity(), skynet.getSecondCity()));
+                skynet.showAfterGraph(skynet.getAfterGraph());
+
             }
 
             skynet.getCitiesMenuRef().setVisible(false);
@@ -171,6 +214,11 @@ public class Listener implements ActionListener {
             skynet.getCitiesMenuRef().getTxaSecond().setText("");
             skynet.getCitiesMenuRef().getTxfFirst().setText("");
             skynet.getCitiesMenuRef().getTxfSecond().setText("");
+
+        } else if (e.getSource().equals(skynet.getConsoleMenu().getBtnAccept())) {
+
+            //skynet.getConsoleMenu().getTxaConsole().setText("");
+            skynet.getConsoleMenu().setVisible(false);
 
         }
 

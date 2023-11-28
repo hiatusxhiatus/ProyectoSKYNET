@@ -6,21 +6,29 @@
     {"id": "D", "soldiers": 400, "missiles": 2, "techLevel": 1},
     {"id": "E", "soldiers": 1200, "missiles": 8, "techLevel": 5},
     {"id": "F", "soldiers": 700, "missiles": 4, "techLevel": 3},
-    {"id": "G", "soldiers": 900, "missiles": 6, "techLevel": 4}
+    {"id": "G", "soldiers": 900, "missiles": 6, "techLevel": 4},
+    {"id": "H", "soldiers": 1100, "missiles": 5, "techLevel": 2},
+    {"id": "I", "soldiers": 950, "missiles": 3, "techLevel": 4}
   ],
   "edges": [
+
+    {"source": "A", "target": "B", "military": 10, "goods": 10, "distance": 200},
+    {"source": "A", "target": "H", "military": 15, "goods": 10, "distance": 450},
+    {"source": "A", "target": "F", "military": 50, "goods": 50, "distance": 600},
+    {"source": "B", "target": "C", "military": 20, "goods": 20, "distance": 250},
+    {"source": "C", "target": "G", "military": 20, "goods": 30, "distance": 600},
+    {"source": "C", "target": "H", "military": 50, "goods": 50, "distance": 250},
+    {"source": "C", "target": "D", "military": 30, "goods": 30, "distance": 500},
+    {"source": "D", "target": "H", "military": 5, "goods": 10, "distance": 100},
+    {"source": "D", "target": "E", "military": 30, "goods": 40, "distance": 100},
+    {"source": "D", "target": "I", "military": 20, "goods": 10, "distance": 150},
+    {"source": "E", "target": "F", "military": 100, "goods": 100, "distance": 400},
+    {"source": "E", "target": "H", "military": 50, "goods": 100, "distance": 200},
     {"source": "A", "target": "B", "military": 2, "goods": 3, "distance": 1000},
-    {"source": "B", "target": "C", "military": 3, "goods": 6, "distance": 200},
-    {"source": "C", "target": "D", "military": 1, "goods": 7, "distance": 350},
-    {"source": "D", "target": "A", "military": 5, "goods": 2, "distance": 600},
-    {"source": "D", "target": "B", "military": 2, "goods": 3, "distance": 800},
-    {"source": "A", "target": "E", "military": 4, "goods": 5, "distance": 1200},
-    {"source": "E", "target": "F", "military": 3, "goods": 4, "distance": 500},
-    {"source": "F", "target": "G", "military": 2, "goods": 6, "distance": 300},
-    {"source": "G", "target": "A", "military": 6, "goods": 2, "distance": 900}
+    {"source": "A", "target": "B", "military": 2, "goods": 3, "distance": 1000}
+
   ]
 }
-
 
 
 

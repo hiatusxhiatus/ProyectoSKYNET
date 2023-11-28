@@ -114,8 +114,21 @@ public class AnnihilationsAlgorithms {
     {
 
     }
-    public void type10Annihilation()
-    {
+    public static Graph<CustomVertex,CustomWeightedEdge> type10Annihilation(Graph<CustomVertex, CustomWeightedEdge> actualGraph, CustomVertex city1, CustomVertex city2) {
+
+        List<GraphPath<CustomVertex,CustomWeightedEdge>> allPaths = findAllPaths(actualGraph,city1,city2);
+
+        if (allPaths == null){
+            System.out.println("NULL");
+        }
+
+        GraphPath<CustomVertex, CustomWeightedEdge> mostExpensivePath = getMostExpensivePath(allPaths);
+
+        List<CustomWeightedEdge> edgesToRemove = mostExpensivePath.getEdgeList();
+        addEdgesToList(actualGraph,edgesToRemove);
+
+        removeEdges(actualGraph, edgesToRemove);
+        return actualGraph;
 
     }
 
@@ -181,7 +194,7 @@ public class AnnihilationsAlgorithms {
         List<CustomVertex> verticesToRemove = new ArrayList<>();
 
         if (numVerticesToRemove > graph.vertexSet().size()) {
-            // Si se solicita eliminar más vértices de los disponibles, regresar nulo
+
             return null;
         }
 
@@ -193,7 +206,7 @@ public class AnnihilationsAlgorithms {
                 verticesToRemove.add(vertex);
 
                 if (verticesToRemove.size() == numVerticesToRemove) {
-                    // Si se han eliminado suficientes vértices, salir del bucle
+
                     break;
                 }
             } else {
@@ -201,12 +214,10 @@ public class AnnihilationsAlgorithms {
             }
         }
 
-        // Restaurar los vértices al grafo antes de devolver la lista
         for (CustomVertex vertex : verticesToRemove) {
             graph.addVertex(vertex);
         }
 
-        // Verificar si se eliminaron suficientes vértices
         return verticesToRemove.size() == numVerticesToRemove ? verticesToRemove : null;
     }
 
@@ -365,14 +376,11 @@ public class AnnihilationsAlgorithms {
                 CustomVertex source = customGraph.getEdgeSource(edge);
                 CustomVertex target = customGraph.getEdgeTarget(edge);
 
-                // Obtener celdas correspondientes a los vértices fuente y destino
                 Object sourceCell = vertexCellMap.get(source);
                 Object targetCell = vertexCellMap.get(target);
 
-                // Insertar la arista en JGraphX en ambas direcciones
                 Object edgeCell = jGraphXGraph.insertEdge(parent, null, "", sourceCell, targetCell);
 
-                // Cambiar el color del borde de las aristas
                 String style = mxConstants.STYLE_STROKECOLOR + "=#FFFFFF;" +
                         mxConstants.STYLE_STROKEWIDTH + "=6;" +
                         mxConstants.STYLE_ENDARROW + "=" + mxConstants.ARROW_CLASSIC;
@@ -483,7 +491,6 @@ public class AnnihilationsAlgorithms {
 
         for (CustomWeightedEdge edge : edgesToRemove) {
             copy.removeEdge(edge);
-            System.out.println("AAA");
         }
 
         return copy;
@@ -521,4 +528,62 @@ public class AnnihilationsAlgorithms {
 
     // ALGORITHM #10
 
+    //List<GraphPath<CustomVertex, CustomWeightedEdge>>
+    public static List<GraphPath<CustomVertex, CustomWeightedEdge>> findAllPaths(Graph<CustomVertex, CustomWeightedEdge> actualGraph, CustomVertex city1, CustomVertex city2) {
+
+        if (actualGraph == null) {
+            throw new IllegalArgumentException("El grafo no puede ser nulo.");
+        }
+
+        if (city1 == null || city2 == null) {
+            throw new IllegalArgumentException("Los vértices no pueden ser nulos.");
+        }
+
+        if (!actualGraph.containsVertex(city1) || !actualGraph.containsVertex(city2)) {
+            throw new IllegalArgumentException("Los vértices deben estar presentes en el grafo.");
+        }
+
+        try {
+
+            System.out.println("EPICO");
+
+            AllDirectedPaths<CustomVertex, CustomWeightedEdge> allPaths = new AllDirectedPaths<>(actualGraph);
+            List<GraphPath<CustomVertex, CustomWeightedEdge>> paths = allPaths.getAllPaths(city1, city2, true, null);
+
+            System.out.println("NO EPICO");
+            return paths.isEmpty() ? null : paths;
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public static GraphPath<CustomVertex, CustomWeightedEdge> getMostExpensivePath(List<GraphPath<CustomVertex, CustomWeightedEdge>> paths) {
+        if (paths == null || paths.isEmpty()) {
+            return null;
+        }
+
+        GraphPath<CustomVertex, CustomWeightedEdge> mostExpensivePath = paths.get(0);
+        double maxWeight = calculateWeight(mostExpensivePath);
+
+        for (GraphPath<CustomVertex, CustomWeightedEdge> path : paths) {
+            double currentWeight = calculateWeight(path);
+            if (currentWeight > maxWeight) {
+                mostExpensivePath = path;
+                maxWeight = currentWeight;
+            }
+        }
+
+        return mostExpensivePath;
+    }
+
+    private static double calculateWeight(GraphPath<CustomVertex, CustomWeightedEdge> path) {
+
+        double weight = 0.0;
+        for (CustomWeightedEdge edge : path.getEdgeList()) {
+            weight += edge.getWeight();
+        }
+        return weight;
+    }
 }

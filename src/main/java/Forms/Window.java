@@ -32,7 +32,7 @@ public class Window extends javax.swing.JFrame {
         txfUploadGraph = new javax.swing.JTextField();
         btnAnnihilate = new javax.swing.JButton();
         btnUpload = new javax.swing.JButton();
-        btnAnnihilateSimulation = new javax.swing.JButton();
+        btnNextRound = new javax.swing.JButton();
         cbxAnnihilateCode = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,12 +114,12 @@ public class Window extends javax.swing.JFrame {
         pnlGraphs.add(btnUpload);
         btnUpload.setBounds(240, 140, 30, 30);
 
-        btnAnnihilateSimulation.setBackground(new java.awt.Color(51, 0, 153));
-        btnAnnihilateSimulation.setFont(new java.awt.Font("Pixel NES", 0, 10)); // NOI18N
-        btnAnnihilateSimulation.setForeground(new java.awt.Color(255, 255, 255));
-        btnAnnihilateSimulation.setText("Annihilate Simulation");
-        pnlGraphs.add(btnAnnihilateSimulation);
-        btnAnnihilateSimulation.setBounds(20, 72, 210, 30);
+        btnNextRound.setBackground(new java.awt.Color(51, 0, 153));
+        btnNextRound.setFont(new java.awt.Font("Pixel NES", 0, 12)); // NOI18N
+        btnNextRound.setForeground(new java.awt.Color(255, 255, 255));
+        btnNextRound.setText("Next Round");
+        pnlGraphs.add(btnNextRound);
+        btnNextRound.setBounds(20, 72, 210, 30);
 
         cbxAnnihilateCode.setBackground(new java.awt.Color(51, 0, 153));
         cbxAnnihilateCode.setFont(new java.awt.Font("Pixel NES", 0, 12)); // NOI18N
@@ -153,7 +153,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel bgAfter;
     private javax.swing.JLabel bgBefore;
     private javax.swing.JButton btnAnnihilate;
-    private javax.swing.JButton btnAnnihilateSimulation;
+    private javax.swing.JButton btnNextRound;
     private javax.swing.JButton btnUpload;
     private javax.swing.JComboBox<String> cbxAnnihilateCode;
     private javax.swing.JLabel jLabel2;
@@ -175,11 +175,11 @@ public class Window extends javax.swing.JFrame {
     }
 
     public JButton getBtnAnnihilateSimulation() {
-        return btnAnnihilateSimulation;
+        return btnNextRound;
     }
 
     public void setBtnAnnihilateSimulation(JButton btnAnnihilateSimulation) {
-        this.btnAnnihilateSimulation = btnAnnihilateSimulation;
+        this.btnNextRound = btnAnnihilateSimulation;
     }
 
     public JButton getBtnUpload() {
@@ -258,6 +258,7 @@ public class Window extends javax.swing.JFrame {
         return cbxAnnihilateCode;
     }
 
-    
-
+    public JButton getBtnNextRound() {
+        return btnNextRound;
+    }
 }

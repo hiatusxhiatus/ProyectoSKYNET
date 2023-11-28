@@ -3,6 +3,7 @@ package Classes;
 import Forms.Listener;
 import Forms.SelectCitiesMenu;
 import Forms.Window;
+import Forms.showConsoleMenu;
 import Graphs.GraphToGUI;
 import Graphs.JsonToGraph;
 import org.jgrapht.Graph;
@@ -11,13 +12,14 @@ import Graphs.CustomVertex;
 import Graphs.CustomWeightedEdge;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 import java.util.Set;
 
 public class Skynet {
 
     private Window windowRef;
     private SelectCitiesMenu citiesMenuRef;
+    private showConsoleMenu consoleMenu;
     private String pathUpload;
     private Graph<CustomVertex, CustomWeightedEdge> beforeGraph;
     private Graph<CustomVertex, CustomWeightedEdge> afterGraph;
@@ -26,15 +28,18 @@ public class Skynet {
     private CustomVertex firstCity;
     private CustomVertex secondCity;
 
-    public Skynet(Window windowRef, SelectCitiesMenu citiesMenuRef)
+    public Skynet(Window windowRef, SelectCitiesMenu citiesMenuRef, showConsoleMenu consoleMenu)
     {
         this.windowRef = windowRef;
         this.citiesMenuRef = citiesMenuRef;
+        this.consoleMenu = consoleMenu;
         this.windowRef.setVisible(true);
 
         new Listener(windowRef.getBtnUpload(), this);
         new Listener(windowRef.getBtnAnnihilate(), this);
         new Listener(citiesMenuRef.getBtnAccept(), this);
+        new Listener(windowRef.getBtnNextRound(), this);
+        new Listener(consoleMenu.getBtnAccept(), this);
 
         initialize();
     }
@@ -71,9 +76,10 @@ public class Skynet {
         windowRef.getPnlBefore().add(graphComponent);
     }
 
-    public void nextRound(boolean indicator){
+    public void nextRound(boolean indicator) {
 
         if(indicator) {
+
             setBeforeGraph(getAfterGraph());
 
             windowRef.getPnlAfter().removeAll();
@@ -85,11 +91,20 @@ public class Skynet {
             windowRef.getPnlBefore().repaint();
 
             showBeforeGraph(getBeforeGraph());
-
         }
 
         // Caso para el 3 y 5
         else {
+
+            windowRef.getPnlAfter().removeAll();
+            windowRef.getPnlAfter().revalidate();
+            windowRef.getPnlAfter().repaint();
+
+            windowRef.getPnlBefore().removeAll();
+            windowRef.getPnlBefore().revalidate();
+            windowRef.getPnlBefore().repaint();
+
+            showBeforeGraph(getBeforeGraph());
 
         }
     }
@@ -118,7 +133,7 @@ public class Skynet {
 
     public static void main(String[] args)
     {
-        Skynet skynet = new Skynet(new Window(), new SelectCitiesMenu());
+        Skynet skynet = new Skynet(new Window(), new SelectCitiesMenu(), new showConsoleMenu());
     }
 
     // GETTERs AND SETTERs
@@ -177,5 +192,9 @@ public class Skynet {
 
     public ArrayList<CustomVertex> getVerticesArray() {
         return verticesArray;
+    }
+
+    public showConsoleMenu getConsoleMenu() {
+        return consoleMenu;
     }
 }

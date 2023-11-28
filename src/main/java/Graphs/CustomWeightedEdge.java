@@ -40,4 +40,8 @@ import org.jgrapht.graph.DefaultWeightedEdge;
     public void setMilitary(int military) {
         this.military = military;
     }
+
+    public double getWeight() {
+        return super.getWeight();
+    }
 }

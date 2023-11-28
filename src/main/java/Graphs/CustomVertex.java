@@ -36,4 +36,5 @@ public class CustomVertex {
     public int getTechLevel(){
         return techLevel;
     }
+
 }
