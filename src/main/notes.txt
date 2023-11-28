@@ -1,0 +1,63 @@
+NOTAS:
+
+    - VERIFICAR VALIDACIONES DE CADA ANIQUILACION
+
+>>> ALGORITMO 1:
+
+    - Totalmente listo
+
+>>> ALGORITMO 2:
+
+    - En el algoritmo se muestra primero el MST
+    y despues de 10 segundos desaperece "mostrando"
+    la aniquilacion. Esto se podria manejar con un
+    switch o un boton en vez de que sea por timer.
+
+    -
+
+>>> ALGORITMO 3:
+
+    - Totalmente listo
+
+>>> ALGORITMO 4:
+
+    - xD
+
+>>> ALGORITMO 5:
+
+    - Solo falta mostrar el edgeList que conforma el eulerianPath del grafo,
+    ya esta implementada la logica para conseguir la lista aristas que
+    conforman el camino euleriano. (GUI)
+
+>>> ALGORITMO 6:
+
+    - Hice varias pruebas, se supone que funciona, no estoy 100 porciento seguro
+    - Comentarle a Dani tema de el bidireccionalismo
+    - Solo falta mostrar el edgeList que conforma el eulerianPath del grafo,
+    ya esta implementada la logica para conseguir la lista aristas que
+    conforman el camino euleriano. (GUI)
+
+>>> ALGORITMO 7:
+
+    - Revision mas a profundidad
+    - Falta verificar que existe al menos un camino entre los nodos
+
+>>> ALGORITMO 8:
+
+    - Revision mas a profundidad
+    - Falta verificar que existe al menos un camino entre los nodos
+
+>>> ALGORTIMO 9:
+
+>>> ALGORITMO 10:
+
+      ---- NOTAS GENERALES ----
+
+ => Falta tratar de clonar un grafo
+
+ => En skynet hay una funcion next round para la siguiente aniquilación
+
+ => Falta un mecanismo para que el usuario eliga que aniquilación quiere ejecutar
+
+ => Yo apenas me despierte preparo los grafos que se pidieron para la revisión
+
