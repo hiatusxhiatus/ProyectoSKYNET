@@ -1,6 +1,7 @@
 package Classes;
 
 import Forms.Listener;
+import Forms.SelectCitiesMenu;
 import Forms.Window;
 import Graphs.GraphToGUI;
 import Graphs.JsonToGraph;
@@ -10,29 +11,30 @@ import Graphs.CustomVertex;
 import Graphs.CustomWeightedEdge;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 public class Skynet {
 
     private Window windowRef;
+    private SelectCitiesMenu citiesMenuRef;
     private String pathUpload;
     private Graph<CustomVertex, CustomWeightedEdge> beforeGraph;
     private Graph<CustomVertex, CustomWeightedEdge> afterGraph;
+    private Set<CustomVertex> vertices;
+    private ArrayList<CustomVertex> verticesArray;
     private CustomVertex firstCity;
     private CustomVertex secondCity;
-    private Scanner scanner;
 
-    public Skynet(Window windowRef)
+    public Skynet(Window windowRef, SelectCitiesMenu citiesMenuRef)
     {
         this.windowRef = windowRef;
+        this.citiesMenuRef = citiesMenuRef;
         this.windowRef.setVisible(true);
 
-        Listener listener = new Listener(windowRef.getBtnUpload(), this);
-        Listener listener2 = new Listener(windowRef.getBtnAnnihilate(), this);
-
-        this.scanner = new Scanner(System.in);
+        new Listener(windowRef.getBtnUpload(), this);
+        new Listener(windowRef.getBtnAnnihilate(), this);
+        new Listener(citiesMenuRef.getBtnAccept(), this);
 
         initialize();
     }
@@ -92,42 +94,31 @@ public class Skynet {
         }
     }
 
-    public void selectCitiesMenu(){
+    public void selectCitiesMenu() {
 
-        String city1 = "";
-        String city2 = "";
-
-        System.out.println("\n >>> CITIES AVAILABLE <<<\n");
-
-        Set<CustomVertex> vertices = beforeGraph.vertexSet();
-        ArrayList<CustomVertex> verticesArray = new ArrayList<CustomVertex>();
+        this.vertices = beforeGraph.vertexSet();
+        this.verticesArray = new ArrayList<>();
 
         int i = 1;
+        String str = "";
 
-        for (CustomVertex vertex : vertices){
-
+        for (CustomVertex vertex : vertices)
+        {
             verticesArray.add(vertex);
-            System.out.println("->> " + i + ". " + vertex.getId());
+            str += i + ". " + vertex.getId() + "\n";
             i++;
-
         }
 
-        System.out.print("First City: ");
-        city1 = scanner.nextLine();
-        System.out.println();
-        System.out.print ("Second City: ");
-        city2 = scanner.nextLine();
-
-        setFirstCity(verticesArray.get(Integer.parseInt(city1)-1));
-        setSecondCity(verticesArray.get(Integer.parseInt(city2)-1));
-
+        citiesMenuRef.getTxaFirst().setText(str);
+        citiesMenuRef.getTxaSecond().setText(str);
+        citiesMenuRef.setVisible(true);
     }
 
     // CLASS MAIN
 
     public static void main(String[] args)
     {
-        Skynet skynet = new Skynet(new Window());
+        Skynet skynet = new Skynet(new Window(), new SelectCitiesMenu());
     }
 
     // GETTERs AND SETTERs
@@ -174,5 +165,17 @@ public class Skynet {
 
     public void setSecondCity(CustomVertex secondCity) {
         this.secondCity = secondCity;
+    }
+
+    public SelectCitiesMenu getCitiesMenuRef() {
+        return citiesMenuRef;
+    }
+
+    public Set<CustomVertex> getVertices() {
+        return vertices;
+    }
+
+    public ArrayList<CustomVertex> getVerticesArray() {
+        return verticesArray;
     }
 }
